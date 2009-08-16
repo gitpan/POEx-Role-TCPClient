@@ -1,0 +1,15 @@
+---
+abstract: 'Moose Role for turning ordinary objects into POE TCP Clients'
+author:
+  - 'Nicholas Perez <nperez@cpan.org>'
+generated_by: 'Dist::Zilla::Plugin::MetaYAML version 1.092200'
+license: gpl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: POEx-Role-TCPClient
+requires:
+  POEx::Role::SessionInstantiation: 0.092280
+resources:
+  repository: git://github.com/nperez/pxrtc.git
+version: 0.092280
