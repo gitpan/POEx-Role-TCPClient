@@ -1,5 +1,5 @@
 package POEx::Role::TCPClient;
-our $VERSION = '0.092280';
+our $VERSION = '0.092340';
 
 
 #ABSTRACT: A Moose Role that provides TCPClient behavior
@@ -52,7 +52,8 @@ role POEx::Role::TCPClient
             get     => 'get_wheel',
             set     => 'set_wheel',
             delete  => 'delete_wheel',
-            count   => 'has_wheels',
+            count   => 'count_wheels',
+            exists  => 'has_wheel',
         }
     );
 
@@ -159,7 +160,7 @@ POEx::Role::TCPClient - A Moose Role that provides TCPClient behavior
 
 =head1 VERSION
 
-version 0.092280
+version 0.092340
 
 =head1 REQUIRES
 
@@ -217,7 +218,8 @@ for more details.
         get     => 'get_wheel',
         set     => 'set_wheel',
         delete  => 'delete_wheel',
-        count   => 'has_wheels',
+        count   => 'count_wheels',
+        exists  => 'has_wheel',
     }
 
 

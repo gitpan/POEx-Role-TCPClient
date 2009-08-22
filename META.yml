@@ -12,4 +12,4 @@ requires:
   POEx::Role::SessionInstantiation: 0.092280
 resources:
   repository: git://github.com/nperez/pxrtc.git
-version: 0.092280
+version: 0.092340
