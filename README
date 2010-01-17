@@ -1,11 +1,11 @@
 
 
 This archive contains the distribution POEx-Role-TCPClient, version
-0.092340:
+0.100170:
 
   Moose Role for turning ordinary objects into POE TCP Clients
 
-This software is Copyright (c) 2009 by Nicholas Perez.
+This software is Copyright (c) 2010 by Nicholas Perez.
 
 This is free software, licensed under:
 
