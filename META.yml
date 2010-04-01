@@ -2,17 +2,26 @@
 abstract: 'Moose Role for turning ordinary objects into POE TCP Clients'
 author:
   - 'Nicholas Perez <nperez@cpan.org>'
-generated_by: 'Dist::Zilla version 1.093400'
-license: gpl
+build_requires:
+  POE: 0
+  Test::More: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.31
+generated_by: 'Dist::Zilla version 2.100880'
+license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: POEx-Role-TCPClient
 requires:
-  Moose: 0.93
-  MooseX::Declare: 0.32
-  POE: 1.281
-  POEx::Role::SessionInstantiation: 0.092800
+  MooseX::Declare: 0
+  MooseX::Types::Moose: 0
+  POE::Filter::Line: 0
+  POE::Wheel::ReadWrite: 0
+  POE::Wheel::SocketFactory: 0
+  POEx::Role::SessionInstantiation: 0
+  POEx::Types: 0
+  aliased: 0
 resources:
   repository: git://github.com/nperez/pxrtc.git
-version: 0.100170
+version: 1.100910

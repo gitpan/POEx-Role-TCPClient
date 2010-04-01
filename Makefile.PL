@@ -4,22 +4,48 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker 6.31;
 
-WriteMakefile(
-  DISTNAME  => 'POEx-Role-TCPClient',
-  NAME      => 'POEx::Role::TCPClient',
-  AUTHOR    => "Nicholas\ Perez\ \<nperez\@cpan\.org\>",
-  ABSTRACT  => "Moose\ Role\ for\ turning\ ordinary\ objects\ into\ POE\ TCP\ Clients",
-  VERSION   => '0.100170',
-  EXE_FILES => [ qw() ],
-  (eval { ExtUtils::MakeMaker->VERSION(6.31) } ? (LICENSE => 'gpl') : ()),
-  PREREQ_PM    => {
-    "POEx::Role::SessionInstantiation" => '0.092800',
-    "MooseX::Declare" => '0.32',
-    "POE" => '1.281',
-    "Moose" => '0.93',
-  },
-  test => {TESTS => 't/*.t'}
-);
+
+
+my %WriteMakefileArgs = (
+                       'test' => {
+                                   'TESTS' => 't/*.t'
+                                 },
+                       'NAME' => 'POEx::Role::TCPClient',
+                       'DISTNAME' => 'POEx-Role-TCPClient',
+                       'CONFIGURE_REQUIRES' => {
+                                                 'ExtUtils::MakeMaker' => '6.31'
+                                               },
+                       'AUTHOR' => 'Nicholas Perez <nperez@cpan.org>',
+                       'BUILD_REQUIRES' => {
+                                             'Test::More' => '0',
+                                             'POE' => '0'
+                                           },
+                       'ABSTRACT' => 'Moose Role for turning ordinary objects into POE TCP Clients',
+                       'EXE_FILES' => [],
+                       'VERSION' => '1.100910',
+                       'PREREQ_PM' => {
+                                        'POEx::Role::SessionInstantiation' => '0',
+                                        'MooseX::Types::Moose' => '0',
+                                        'MooseX::Declare' => '0',
+                                        'POE::Wheel::ReadWrite' => '0',
+                                        'POE::Filter::Line' => '0',
+                                        'aliased' => '0',
+                                        'POE::Wheel::SocketFactory' => '0',
+                                        'POEx::Types' => '0'
+                                      },
+                       'LICENSE' => 'perl'
+                     );
+
+
+delete $WriteMakefileArgs{BUILD_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.56) };
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
 
