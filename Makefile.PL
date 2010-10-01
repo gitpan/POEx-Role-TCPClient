@@ -9,38 +9,48 @@ use ExtUtils::MakeMaker 6.31;
 
 
 my %WriteMakefileArgs = (
-                       'test' => {
-                                   'TESTS' => 't/*.t'
-                                 },
-                       'NAME' => 'POEx::Role::TCPClient',
-                       'DISTNAME' => 'POEx-Role-TCPClient',
-                       'CONFIGURE_REQUIRES' => {
-                                                 'ExtUtils::MakeMaker' => '6.31'
-                                               },
-                       'AUTHOR' => 'Nicholas Perez <nperez@cpan.org>',
-                       'BUILD_REQUIRES' => {
-                                             'Test::More' => '0',
-                                             'POE' => '0'
-                                           },
-                       'ABSTRACT' => 'Moose Role for turning ordinary objects into POE TCP Clients',
-                       'EXE_FILES' => [],
-                       'VERSION' => '1.100910',
-                       'PREREQ_PM' => {
-                                        'POEx::Role::SessionInstantiation' => '0',
-                                        'MooseX::Types::Moose' => '0',
-                                        'MooseX::Declare' => '0',
-                                        'POE::Wheel::ReadWrite' => '0',
-                                        'POE::Filter::Line' => '0',
-                                        'aliased' => '0',
-                                        'POE::Wheel::SocketFactory' => '0',
-                                        'POEx::Types' => '0'
-                                      },
-                       'LICENSE' => 'perl'
-                     );
+  'ABSTRACT' => 'A Moose Role that provides TCPClient behavior',
+  'AUTHOR' => 'Nicholas Perez <nperez@cpan.org>',
+  'BUILD_REQUIRES' => {
+    'POE' => '0',
+    'Test::More' => '0'
+  },
+  'CONFIGURE_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.31'
+  },
+  'DISTNAME' => 'POEx-Role-TCPClient',
+  'EXE_FILES' => [],
+  'LICENSE' => 'perl',
+  'NAME' => 'POEx::Role::TCPClient',
+  'PREREQ_PM' => {
+    'MooseX::Declare' => '0',
+    'MooseX::Types::Moose' => '0',
+    'POE::Filter::Line' => '0',
+    'POE::Wheel::ReadWrite' => '0',
+    'POE::Wheel::SocketFactory' => '0',
+    'POEx::Role::SessionInstantiation' => '0',
+    'POEx::Types' => '0',
+    'aliased' => '0'
+  },
+  'VERSION' => '1.102740',
+  'test' => {
+    'TESTS' => 't/*.t'
+  }
+);
 
 
-delete $WriteMakefileArgs{BUILD_REQUIRES}
-  unless eval { ExtUtils::MakeMaker->VERSION(6.56) };
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
 
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
   unless eval { ExtUtils::MakeMaker->VERSION(6.52) };

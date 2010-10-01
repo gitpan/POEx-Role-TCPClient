@@ -1,4 +1,8 @@
-Revision history for POEx-Role-TCPClient: 1.100910
+Revision history for POEx-Role-TCPClient: 1.102740
+
+1.102740  2010-10-01 14:08:03 America/Chicago
+        Update dist.ini and weaver.ini
+        Move braces to work around MXD bug
 
 1.100910  2010-04-01 01:56:28 America/Chicago
         Switch to using native attribute traits in moose

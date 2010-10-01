@@ -1,0 +1,50 @@
+{
+   "abstract" : "A Moose Role that provides TCPClient behavior",
+   "author" : [
+      "Nicholas Perez <nperez@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.102341, CPAN::Meta::Converter version 2.102400",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "POEx-Role-TCPClient",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.31"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "MooseX::Declare" : 0,
+            "MooseX::Types::Moose" : 0,
+            "POE::Filter::Line" : 0,
+            "POE::Wheel::ReadWrite" : 0,
+            "POE::Wheel::SocketFactory" : 0,
+            "POEx::Role::SessionInstantiation" : 0,
+            "POEx::Types" : 0,
+            "aliased" : 0
+         }
+      },
+      "test" : {
+         "requires" : {
+            "POE" : 0,
+            "Test::More" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/nperez/pxrtc.git"
+      }
+   },
+   "version" : "1.102740"
+}
+

@@ -5,8 +5,7 @@ use MooseX::Declare;
 
 my $port = int(rand(10000)) + 50000;
 
-class Client 
-{
+class Client {
     use MooseX::Types::Moose(':all');
     use POEx::Types(':all');
     use POE::Wheel::SocketFactory;
@@ -15,21 +14,18 @@ class Client
     use aliased 'POEx::Role::Event';
     has server => ( is => 'rw', isa => Object, clearer => 'clear_server' );
 
-    method handle_inbound_data($data, WheelID $id) is Event
-    {
+    method handle_inbound_data($data, WheelID $id) is Event {
         is($data, 'TEST', 'Got inbound data');
         $self->yield('shutdown');
     }
 
     with 'POEx::Role::TCPClient';
     
-    after shutdown is Event
-    {
+    after shutdown is Event {
         pass('shutdown called');
     }
 
-    before connect(Str :$remote_address, Int :$remote_port, Ref :$tag?) is Event
-    {
+    before connect(Str :$remote_address, Int :$remote_port, Ref :$tag?) is Event {
         pass('before connect called');
 
         $self->server
@@ -47,10 +43,8 @@ class Client
         pass('Server socket created');
     }
 
-    after handle_on_connect(GlobRef $socket, Str $address, Int $port, WheelID $id) is Event
-    {
-        if($self->has_connection_tag($id))
-        {
+    after handle_on_connect(GlobRef $socket, Str $address, Int $port, WheelID $id) is Event {
+        if($self->has_connection_tag($id)) {
             pass('Got tag');
 
             my $tag = $self->delete_connection_tag($id);
@@ -59,15 +53,13 @@ class Client
         }
     }
 
-    method accept_socket(GlobRef $socket, Str $address, Int $port, WheelID $id) is Event
-    {
+    method accept_socket(GlobRef $socket, Str $address, Int $port, WheelID $id) is Event {
         pass('Socket accept called');
         print $socket "TEST\n";
         $self->clear_server;
     }
 
-    method fail_listen(Str $action, Int $err, Str $msg, WheelID $id) is Event
-    {
+    method fail_listen(Str $action, Int $err, Str $msg, WheelID $id) is Event {
         diag("Failed to $action: $err -> $msg");
         BAIL_OUT(q|Can't listen for client connection|);
     }

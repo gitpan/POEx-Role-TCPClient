@@ -1,9 +1,9 @@
 
 
 This archive contains the distribution POEx-Role-TCPClient,
-version 1.100910:
+version 1.102740:
 
-  Moose Role for turning ordinary objects into POE TCP Clients
+  A Moose Role that provides TCPClient behavior
 
 This software is copyright (c) 2010 by Nicholas Perez.
 

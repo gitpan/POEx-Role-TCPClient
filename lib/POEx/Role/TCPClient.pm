@@ -1,12 +1,13 @@
 package POEx::Role::TCPClient;
-$POEx::Role::TCPClient::VERSION = '1.100910';
+BEGIN {
+  $POEx::Role::TCPClient::VERSION = '1.102740';
+}
 
 #ABSTRACT: A Moose Role that provides TCPClient behavior
 
 use MooseX::Declare;
 
-role POEx::Role::TCPClient 
-{
+role POEx::Role::TCPClient {
     with 'POEx::Role::SessionInstantiation';
     use POEx::Types(':all');
     use MooseX::Types::Moose(':all');
@@ -90,8 +91,7 @@ role POEx::Role::TCPClient
     );
 
 
-    method connect(Str :$remote_address, Int :$remote_port, Ref :$tag?) is Event
-    {
+    method connect(Str :$remote_address, Int :$remote_port, Ref :$tag?) is Event {
         my $sfactory = POE::Wheel::SocketFactory->new
         (
             RemoteAddress       => $remote_address,
@@ -107,8 +107,7 @@ role POEx::Role::TCPClient
     }
 
 
-    method handle_on_connect (GlobRef $socket, Str $address, Int $port, WheelID $id) is Event
-    {
+    method handle_on_connect (GlobRef $socket, Str $address, Int $port, WheelID $id) is Event {
         my $wheel = POE::Wheel::ReadWrite->new
         (
             Handle      => $socket,
@@ -123,22 +122,19 @@ role POEx::Role::TCPClient
     }
 
 
-    method handle_connect_error(Str $action, Int $code, Str $message, WheelID $id) is Event
-    {
+    method handle_connect_error(Str $action, Int $code, Str $message, WheelID $id) is Event {
         warn "Received connect error: Action $action, Code $code, Message $message from $id"
             if $self->options->{'debug'};
     }
 
 
-    method handle_socket_error(Str $action, Int $code, Str $message, WheelID $id) is Event
-    {
+    method handle_socket_error(Str $action, Int $code, Str $message, WheelID $id) is Event {
         warn "Received socket error: Action $action, Code $code, Message $message from $id"
             if $self->options->{'debug'};
     }
 
 
-    method shutdown() is Event
-    {
+    method shutdown() is Event {
         $self->clear_socket_factories;
         $self->clear_wheels;
         $self->clear_alias;
@@ -157,7 +153,7 @@ POEx::Role::TCPClient - A Moose Role that provides TCPClient behavior
 
 =head1 VERSION
 
-version 1.100910
+version 1.102740
 
 =head1 DESCRIPTION
 
@@ -303,7 +299,7 @@ it came.
 
 =head1 AUTHOR
 
-  Nicholas Perez <nperez@cpan.org>
+Nicholas Perez <nperez@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
